@@ -8,9 +8,13 @@ public class USACO{
 	String line = inf1.nextLine();
 	row = line.charAt(0);
 	col = line.charAt(1);
-	int[][] maze = new int[row][col]
+	//int end = line.charAt(line.length()-1);
+	int[][] field = new int[row][col]
 	for (int r = 0; r < row; r++){
-		String
+		String line = inf1.nextLine();
+		for (int c = 0; c < col; c++){
+			field[r][c] = line.charAt(a);
+		}
 	}
 
 }
