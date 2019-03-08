@@ -16,11 +16,14 @@ public class USACO{
 		col = Integer.parseInt(inf1.next());
 		inf1.next();
 		inf1.next();
+		line = inf1.nextLine();
+		line = inf1.nextLine();
 		field = new int[row][col];
 		for (int r = 0; r < row; r++){
 			for (int c = 0; c < col; c++){
 				field[r][c] = Integer.parseInt(inf1.next());
 			}
+			line = inf1.nextLine();
 		}
 		//for (int i = 0; i < 9; i++){
 		//	i = false;
