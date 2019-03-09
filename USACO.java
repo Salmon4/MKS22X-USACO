@@ -13,11 +13,12 @@ public class USACO{
 		Scanner inf2 = new Scanner(text);
 		int col = 0;
 		int row = 0;
+		int d;
 		//String line; //inf1.nextLine();
 		row = Integer.parseInt(inf1.next());
 		col = Integer.parseInt(inf1.next());
 		//System.out.println("" + row + " " + col);
-		Integer.parseInt(inf1.next());
+		d = Integer.parseInt(inf1.next());
 		Integer.parseInt(inf1.next());
 		//line = inf1.nextLine();
 		//line = inf1.nextLine();
@@ -28,15 +29,40 @@ public class USACO{
 			}
 			//line = inf1.nextLine();
 		}
+		for (int r = 0; r < field.length; r++){
+			for (int c = 0; c < field[r].length;c++){
+				System.out.print(field[r][c] + " ");
+			}
+			System.out.println("");
+		}
+		System.out.println("       ");
 		//for (int i = 0; i < 9; i++){
 		//	i = false;
 		//}
 		while (inf1.hasNext()){
-		bronzeHelper(Integer.parseInt(inf1.next()),
-			Integer.parseInt(inf1.next()),
+		bronzeHelper(Integer.parseInt(inf1.next())-1,
+			Integer.parseInt(inf1.next())-1,
 			Integer.parseInt(inf1.next()),
 			herd,field);
 			//inf1.nextLine();
+		}
+		int temp = 0;
+		for (int r = 0; r < field.length; r++){
+			for (int c = 0; c < field[r].length;c++){
+				temp = field[r][c];
+				if (d - temp > 0){
+					field[r][c] = d - temp;
+				}
+				else{
+					field[r][c] = 0;
+				}
+			}
+		}
+		for (int r = 0; r < field.length; r++){
+			for (int c = 0; c < field[r].length;c++){
+				System.out.print(field[r][c] + " ");
+			}
+			System.out.println("");
 		}
 
 		int ans = 0;
@@ -45,7 +71,7 @@ public class USACO{
 				ans += field[r][c];
 			}
 		}
-		System.out.println(ans);
+	//	System.out.println(ans);
 	return ans * 72 * 72;
 
 	}
@@ -61,32 +87,39 @@ public class USACO{
 		return max;
 	}
 	private static boolean bronzeHelper(int row, int col, int depth,int[] herd, int[][] field){
+	//	System.out.println("" + row + " " + col);
 
 		//if (depth == 0){
 	//		return true;
 	//	}
 
 
-		herd[0] = field[row][col];
-		herd[1] = field[row][col];
-		herd[2] = field[row][col];
-		herd[3] = field[row][col];
-		herd[4] = field[row][col];
-		herd[5] = field[row][col];
-		herd[6] = field[row][col];
-		herd[7] = field[row][col];
-		herd[8] = field[row][col];
 		while(depth != 0){
+			herd[0] = field[row][col];
+			herd[1] = field[row][col+1];
+			herd[2] = field[row][col+2];
+			herd[3] = field[row+1][col];
+			herd[4] = field[row+1][col+1];
+			herd[5] = field[row+1][col+2];
+			herd[6] = field[row+2][col];
+			herd[7] = field[row+2][col+1];
+			herd[8] = field[row+2][col+2];
+		//int didIt = false;
 		int max = findMax(herd);
-			//System.out.println("" + max);
-		for (int r = 0; r < 2; r++){
-			for (int c = 0; c < 2; c++){
+
+		//	System.out.println("" + max);
+		for (int r = 0; r < 3; r++){
+			for (int c = 0; c < 3; c++){
 				if (field[row + r][col + c] == max){
-					System.out.println("" + max);
+				//	System.out.println("" + max);
 					field[row + r][col + c] -= 1;
+				//	didIt = true;
 				}
 			}
 		}
+		//if (didIt){
+		//	max -= 1;
+		//}
 		depth--;
 	}
 	//	return bronzeHelper(row,col,depth--,herd,field);
