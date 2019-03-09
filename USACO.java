@@ -29,13 +29,6 @@ public class USACO{
 			}
 			//line = inf1.nextLine();
 		}
-		for (int r = 0; r < field.length; r++){
-			for (int c = 0; c < field[r].length;c++){
-				System.out.print(field[r][c] + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("       ");
 		//for (int i = 0; i < 9; i++){
 		//	i = false;
 		//}
@@ -58,12 +51,13 @@ public class USACO{
 				}
 			}
 		}
-		for (int r = 0; r < field.length; r++){
+		for (int r = 0; r < field.length;r++){
 			for (int c = 0; c < field[r].length;c++){
 				System.out.print(field[r][c] + " ");
 			}
 			System.out.println("");
 		}
+
 
 		int ans = 0;
 		for (int r = 0; r < field.length; r++){
@@ -71,7 +65,7 @@ public class USACO{
 				ans += field[r][c];
 			}
 		}
-	//	System.out.println(ans);
+System.out.println(ans);
 	return ans * 72 * 72;
 
 	}
@@ -79,7 +73,7 @@ public class USACO{
 
 	private static int findMax(int[] herd){
 		int max = 0;
-		for (int i = 0; i < 8; i++){
+		for (int i = 0; i < 9; i++){
 			if (max < herd[i]){
 				max = herd[i];
 			}
@@ -104,25 +98,17 @@ public class USACO{
 			herd[6] = field[row+2][col];
 			herd[7] = field[row+2][col+1];
 			herd[8] = field[row+2][col+2];
-		//int didIt = false;
 		int max = findMax(herd);
 
-		//	System.out.println("" + max);
 		for (int r = 0; r < 3; r++){
 			for (int c = 0; c < 3; c++){
 				if (field[row + r][col + c] == max){
-				//	System.out.println("" + max);
 					field[row + r][col + c] -= 1;
-				//	didIt = true;
 				}
 			}
 		}
-		//if (didIt){
-		//	max -= 1;
-		//}
 		depth--;
 	}
-	//	return bronzeHelper(row,col,depth--,herd,field);
 	return true;
 	}
 		/**
