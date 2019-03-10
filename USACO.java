@@ -95,6 +95,7 @@ public class USACO{
 
 	private static int getSum(int row, int col,int[][] Pfield){
 		int ans = 0;
+		//System.out.println(row + " " + col);
 		if (row > 0 && Pfield[row-1][col] >= 0){
 			ans += Pfield[row-1][col];
 		}
@@ -103,18 +104,29 @@ public class USACO{
 		}
 		if (col > 0 && Pfield[row][col - 1] >= 0){
 			ans += Pfield[row][col - 1];
+		//	System.out.println(ans + "+++++++++++++++++");
 		}
 		if (col < Pfield[row].length - 1 && Pfield[row][col+1] >= 0){
 			ans += Pfield[row][col+1];
 		}
+		//System.out.println(ans + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return ans;
 	}
 	private static void expand(int[][] Cfield,int[][] Pfield){
 		for (int r = 0; r < Cfield.length; r++){
 			for (int c = 0; c < Cfield[r].length; c++){
 				if (Cfield[r][c] >= 0){
+					//System.out.println("" + getSum(r,c,Pfield) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				Cfield[r][c] = getSum(r,c,Pfield);
 				}
+			}
+		}
+	}
+
+	public static void copy(int[][] cur, int[][] prev){
+		for (int r = 0; r < prev.length; r++){
+			for (int c = 0; c < prev[r].length; c++){
+				prev[r][c] = cur[r][c];
 			}
 		}
 	}
@@ -170,18 +182,19 @@ public class USACO{
 			fieldCur[startRow][startCol] += 1;
 		}
 
-		fieldPrev = fieldCur;
+		//fieldPrev = fieldCur;
+		copy(fieldCur,fieldPrev);
 		while(time > 0){
 			for (int r = 0; r < row; r++){
 				for (int c = 0; c < col; c++){
-					System.out.print(fieldCur[r][c]);
+					System.out.print(fieldPrev[r][c]);
 				}
 				System.out.println("");
 			}
 			System.out.println("---------------------");
 			expand(fieldCur,fieldPrev);
 			time--;
-			fieldPrev = fieldCur;
+			copy(fieldCur,fieldPrev);
 		}
 		return fieldCur[endRow][endCol];
  	}
