@@ -165,20 +165,20 @@ public class USACO{
 			}
 		}
 
-		startRow = Integer.parseInt(inf1.next()) - 1;
-		startCol = Integer.parseInt(inf1.next()) - 1;
 		endRow = Integer.parseInt(inf1.next()) - 1;
 		endCol = Integer.parseInt(inf1.next()) - 1;
-		if (startRow > 0){
+		startRow = Integer.parseInt(inf1.next()) - 1;
+		startCol = Integer.parseInt(inf1.next()) - 1;
+		if (startRow > 0 && fieldCur[startRow-1][startCol] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
-		if (startRow < fieldCur.length - 1){
+		if (startRow < fieldCur.length - 1 && fieldCur[startRow+1][startCol] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
-		if (startCol > 0){
+		if (startCol > 0 && fieldCur[startRow][startCol-1] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
-		if (startCol < fieldCur[0].length - 1){
+		if (startCol < fieldCur[0].length - 1 && fieldCur[startRow][startCol+1] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
 
@@ -187,11 +187,11 @@ public class USACO{
 		while(time > 0){
 			for (int r = 0; r < row; r++){
 				for (int c = 0; c < col; c++){
-					System.out.print(fieldPrev[r][c]);
+				//	System.out.print(fieldPrev[r][c]);
 				}
-				System.out.println("");
+			//	System.out.println("");
 			}
-			System.out.println("---------------------");
+			//System.out.println("---------------------");
 			expand(fieldCur,fieldPrev);
 			time--;
 			copy(fieldCur,fieldPrev);
