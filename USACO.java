@@ -7,7 +7,7 @@ public class USACO{
 		int[] herd = new int[9];
 		File text = new File(filename);
 		Scanner inf1 = new Scanner(text);
-		Scanner inf2 = new Scanner(text);
+		//Scanner inf2 = new Scanner(text);
 		int col = 0;
 		int row = 0;
 		int d;
@@ -98,6 +98,23 @@ System.out.println(ans);
 	return true;
 	}
 
+
+ 	public static int silver(String filename) throws FileNotFoundException{
+		File text = new File(filename);
+		Scanner inf1 = new Scanner(text);
+		int[][] field;
+		int row = Integer.parseInt(inf1.next());
+		int col = Integer.parseInt(inf1.next());
+		int time = Integer.parseInt(inf1.next());
+		field = new int[row][col];
+		for (int r = 0; r < row; r++){
+			for (int c = 0; c < col; c++){
+				field[r][c] = Integer.parseInt(inf1.next());
+			}
+		}
+
+
+ 	}
 
 
 }
