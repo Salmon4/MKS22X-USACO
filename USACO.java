@@ -165,10 +165,14 @@ public class USACO{
 			}
 		}
 
-		endRow = Integer.parseInt(inf1.next()) - 1;
-		endCol = Integer.parseInt(inf1.next()) - 1;
 		startRow = Integer.parseInt(inf1.next()) - 1;
 		startCol = Integer.parseInt(inf1.next()) - 1;
+		endRow = Integer.parseInt(inf1.next()) - 1;
+		endCol = Integer.parseInt(inf1.next()) - 1;
+		fieldCur[startRow][startCol] = 1;
+	//	System.out.println(startRow + " " + startCol);
+	//	debug(fieldCur);
+		/**
 		if (startRow > 0 && fieldCur[startRow-1][startCol] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
@@ -181,10 +185,13 @@ public class USACO{
 		if (startCol < fieldCur[0].length - 1 && fieldCur[startRow][startCol+1] >= 0){
 			fieldCur[startRow][startCol] += 1;
 		}
+		**/
 
 		//fieldPrev = fieldCur;
 		copy(fieldCur,fieldPrev);
+		//debug(fieldCur);
 		while(time > 0){
+
 			for (int r = 0; r < row; r++){
 				for (int c = 0; c < col; c++){
 				//	System.out.print(fieldPrev[r][c]);
@@ -195,9 +202,28 @@ public class USACO{
 			expand(fieldCur,fieldPrev);
 			time--;
 			copy(fieldCur,fieldPrev);
+			//debug(fieldCur);
 		}
+//debug(fieldCur);
+		//System.out.println(endRow + " " + endCol);
 		return fieldCur[endRow][endCol];
  	}
 
-
+	public static void debug(int[][] thing){
+		for (int r = 0; r < thing.length; r++){
+			for (int c = 0; c < thing[r].length; c++){
+				if (thing[r][c] < 0 || thing[r][c] > 9 && thing[r][c] < 100){
+				System.out.print(" " + " " + thing[r][c]);
+			}
+			if (thing[r][c] > -1 && thing[r][c] < 10){
+				System.out.print("   "  + thing[r][c]);
+			}
+			if (thing[r][c] > 99){
+				System.out.print(" " + thing[r][c]);
+			}
+			}
+			System.out.println("");
+		}
+		System.out.println("----------------------------------");
+	}
 }
