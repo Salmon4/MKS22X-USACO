@@ -44,12 +44,7 @@ public class USACO{
 				}
 			}
 		}
-		for (int r = 0; r < field.length;r++){
-			for (int c = 0; c < field[r].length;c++){
-				System.out.print(field[r][c] + " ");
-			}
-			System.out.println("");
-		}
+
 
 
 		int ans = 0;
@@ -58,7 +53,7 @@ public class USACO{
 				ans += field[r][c];
 			}
 		}
-System.out.println(ans);
+
 	return ans * 72 * 72;
 
 	}
@@ -98,22 +93,77 @@ System.out.println(ans);
 	return true;
 	}
 
-
+	private static int getSum(int row, int col,int[][] Pfield){
+		int ans = 0;
+		if (row > 0 && Pfield[row-1][col] >= 0){
+			ans += Pfield[row-1][col];
+		}
+		if (row < Pfield.length - 1 && Pfield[row+1][col] >= 0){
+			ans += Pfield[row+1][col];
+		}
+		if (col > 0 && Pfield[row][col - 1] >= 0){
+			ans += Pfield[row][col - 1];
+		}
+		if (col < Pfield[row].length - 1 && Pfield[row][col+1] >= 0){
+			ans += Pfield[row][col+1];
+		}
+		return ans;
+	}
+	private static void expand(int[][] Cfield,int[][] Pfield){
+		for (int r = 0; r < Cfield.length; r++){
+			for (int c = 0; c < Cfield[r].length; c++){
+				if (Cfield[r][c] >= 0){
+				Cfield[r][c] = getSum(r,c,Pfield);
+				}
+			}
+		}
+	}
  	public static int silver(String filename) throws FileNotFoundException{
 		File text = new File(filename);
 		Scanner inf1 = new Scanner(text);
-		int[][] field;
+		int[][] fieldCur;
+		int[][] fieldPrev;
 		int row = Integer.parseInt(inf1.next());
 		int col = Integer.parseInt(inf1.next());
 		int time = Integer.parseInt(inf1.next());
-		field = new int[row][col];
+		int startRow;
+		int startCol;
+		int endRow;
+		int endCol;
+		fieldCur = new int[row][col];
+		fieldPrev = new int[row][col];
 		for (int r = 0; r < row; r++){
 			for (int c = 0; c < col; c++){
-				field[r][c] = Integer.parseInt(inf1.next());
+				if (inf1.next() == "*"){
+					fieldCur[r][c] = -1;
+				}
+				else{
+					fieldCur[r][c] = 0;
+				}
 			}
 		}
+		startRow = Integer.parseInt(inf1.next());
+		startCol = Integer.parseInt(inf1.next());
+		endRow = Integer.parseInt(inf1.next());
+		endCol = Integer.parseInt(inf1.next());
+		if (startRow > 0){
+			fieldCur[startRow][startCol] += 1;
+		}
+		if (startRow < fieldCur.length - 1){
+			fieldCur[startRow][startCol] += 1;
+		}
+		if (startCol > 0){
+			fieldCur[startRow][startCol] += 1;
+		}
+		if (startCol < fieldCur[row].length - 1){
+			fieldCur[startRow][startCol] += 1;
+		}
 
-
+		fieldPrev = fieldCur;
+		while(time > 0){
+			expand(fieldCur,fieldPrev);
+		}
+		return fieldCur[endRow][endCol];
  	}
 
 
