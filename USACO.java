@@ -130,22 +130,32 @@ public class USACO{
 		int startCol;
 		int endRow;
 		int endCol;
+		int count = row;
+		int countIndex = 0;
+		String boardString = "";
+		while(count >= 0){
+			boardString += inf1.nextLine();
+			count--;
+		}
+		//System.out.println(boardString);
 		fieldCur = new int[row][col];
 		fieldPrev = new int[row][col];
 		for (int r = 0; r < row; r++){
 			for (int c = 0; c < col; c++){
-				if (inf1.next() == "*"){
+				//System.out.println(inf1.next());
+				if (boardString.substring(countIndex,countIndex+1) == "*"){
 					fieldCur[r][c] = -1;
 				}
 				else{
 					fieldCur[r][c] = 0;
 				}
+				countIndex++;
 			}
 		}
-		startRow = Integer.parseInt(inf1.next());
-		startCol = Integer.parseInt(inf1.next());
-		endRow = Integer.parseInt(inf1.next());
-		endCol = Integer.parseInt(inf1.next());
+		startRow = Integer.parseInt(inf1.next()) - 1;
+		startCol = Integer.parseInt(inf1.next()) - 1;
+		endRow = Integer.parseInt(inf1.next()) - 1;
+		endCol = Integer.parseInt(inf1.next()) - 1;
 		if (startRow > 0){
 			fieldCur[startRow][startCol] += 1;
 		}
@@ -155,13 +165,14 @@ public class USACO{
 		if (startCol > 0){
 			fieldCur[startRow][startCol] += 1;
 		}
-		if (startCol < fieldCur[row].length - 1){
+		if (startCol < fieldCur[0].length - 1){
 			fieldCur[startRow][startCol] += 1;
 		}
 
 		fieldPrev = fieldCur;
 		while(time > 0){
 			expand(fieldCur,fieldPrev);
+			time--;
 		}
 		return fieldCur[endRow][endCol];
  	}
