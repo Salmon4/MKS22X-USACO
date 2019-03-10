@@ -143,7 +143,7 @@ public class USACO{
 		for (int r = 0; r < row; r++){
 			for (int c = 0; c < col; c++){
 				//System.out.println(inf1.next());
-				if (boardString.substring(countIndex,countIndex+1) == "*"){
+				if (boardString.substring(countIndex,countIndex+1).equals("*")){
 					fieldCur[r][c] = -1;
 				}
 				else{
@@ -152,6 +152,7 @@ public class USACO{
 				countIndex++;
 			}
 		}
+
 		startRow = Integer.parseInt(inf1.next()) - 1;
 		startCol = Integer.parseInt(inf1.next()) - 1;
 		endRow = Integer.parseInt(inf1.next()) - 1;
@@ -171,8 +172,16 @@ public class USACO{
 
 		fieldPrev = fieldCur;
 		while(time > 0){
+			for (int r = 0; r < row; r++){
+				for (int c = 0; c < col; c++){
+					System.out.print(fieldCur[r][c]);
+				}
+				System.out.println("");
+			}
+			System.out.println("---------------------");
 			expand(fieldCur,fieldPrev);
 			time--;
+			fieldPrev = fieldCur;
 		}
 		return fieldCur[endRow][endCol];
  	}
