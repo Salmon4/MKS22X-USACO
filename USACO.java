@@ -209,7 +209,7 @@ public class USACO{
 		return fieldCur[endRow][endCol];
  	}
 
-	public static void debug(int[][] thing){
+	private static void debug(int[][] thing){
 		for (int r = 0; r < thing.length; r++){
 			for (int c = 0; c < thing[r].length; c++){
 				if (thing[r][c] < 0 || thing[r][c] > 9 && thing[r][c] < 100){
